@@ -105,7 +105,8 @@ def search_source(option,cs):
     print(f"Category: {response['category']}")
     print(f"Language: {response['language']}")
 
-
+if __name__ == "__main__":
+    start_client()
 
 
 
