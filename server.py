@@ -1,11 +1,15 @@
 import socket
 import json 
 import threading
-server_ip = '127.0.0.1'
-server_port = 5443
-key = ' '
+from newsapi import NewsApiClient 
+
+SERVER_IP = '127.0.0.1'
+SERVER_PORT = 5443
+API_KEY = '844863c15fad42cba626fb66d2c24ef2'
+api = NewsApiClient(api_key=API_KEY)
+
 def handle_clients(socket,address):
-    print(f"start {address}")
+    print(f"Host {address} connected")
     c=client_socket.recv(1024).decode()
     print(f"Client '{c}' connected")
     while True:
@@ -18,6 +22,7 @@ def handle_clients(socket,address):
             break
         print(f"Client '{c}' disconnected")
         client_socket.close()
+
 def search_news(choice, client_socket, c):
     _, sub_choice = choice.split('.')
     if sub_choice == '1':
