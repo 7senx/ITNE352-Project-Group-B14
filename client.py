@@ -47,29 +47,59 @@ def search_headline(option,cs):
     print("4- List all New Headlines")
     print("5- Back to Main Menu")
 
-    if option == '5':
+    sub_option = input("Enter your option: ")
+
+    if sub_option == '5':
         return
-    elif option in ['1','2','3','4']:
-        response = receive(cs)
-        print("Results: ")
+    response = receive(cs)
+    print("Results: ")
 
-        for index, item in enumerate(response['articles']):
-            print(f"{index + 1}. {item['title']} - {item['description']}")
+    for index, item in enumerate(response['articles']):
+        print(f"{index + 1}. {item['title']} - {item['description']}")
 
-        selected_item = int(input("Enter article number: "))
-        
-        send(str(selected_item), client_socket)
-        response = receive(client_socket)
-        print("Article Details:")
-        print(f"Source: {response['source']['name']}")
-        print(f"Author: {response['author']}")
-        print(f"Title: {response['title']}")
-        print(f"URL: {response['url']}")
-        print(f"Description: {response['description']}")
-        print(f"Published At: {response['publishedAt']}")
-        print(f"Content: {response['content']}")
+    selected_item = int(input("Enter article number: "))
+    send(str(selected_item), client_socket)
+    response = receive(client_socket)
 
+    print("Article Details:")
+    print(f"Source: {response['source']['name']}")
+    print(f"Author: {response['author']}")
+    print(f"Title: {response['title']}")
+    print(f"URL: {response['url']}")
+    print(f"Description: {response['description']}")
+    print(f"Published At: {response['publishedAt']}")
+    print(f"Content: {response['content']}")
 
+def search_source(option,cs):
+
+    print("\nSelect option :")
+    print("1- Search by Category")
+    print("2- Search by Country")
+    print("3- Search by Language")
+    print("4- List all")
+    print("5- Back to Main Menu")
+
+    sub_option = input("Enter your option: ")
+    if sub_option == '5':
+        return
+    send(sub_option,cs)
+    response = receive(cs)
+
+    print("Results:")
+    for idx, item in enumerate(response['sources']):
+        print(f"{idx + 1}. {item['name']} - {item['description']}")
+
+    selected_item = int(input("Enter source number: "))
+    send_choice(str(selected_item), client_socket)
+    response = receive_response(client_socket)
+    
+    print("Selected Source Details:")
+    print(f"Source: {response['name']}")
+    print(f"Country: {response['country']}")
+    print(f"Description: {response['description']}")
+    print(f"URL: {response['url']}")
+    print(f"Category: {response['category']}")
+    print(f"Language: {response['language']}")
 
 
 
