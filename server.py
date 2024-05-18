@@ -1,5 +1,6 @@
 import socket
 import json 
+import threading
 server_ip = '127.0.0.1'
 server_port = 5443
 key = ' '
@@ -49,7 +50,3 @@ def search_news(choice, client_socket, c):
             client_handler.start()
     if __name__ == "__main__":
         start_server()
-        
-
-
-
