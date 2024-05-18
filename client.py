@@ -1,8 +1,15 @@
 import socket
-import os
+import json
 
 server_ip = "127.0.0.1"
 server_port = 6677
+
+def receive(cs):
+    response = cs.recv(4096).decode("utf-8")
+    return json.loads(response)
+
+def send(option,cs):
+    cs.send(option.encode("utf-8"))
 
 def start_client():
     cs = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -31,5 +38,10 @@ def start_client():
             print("Invalid option")
     cs.close    
 
-    
+
+
+
+
+
+
     
