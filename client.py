@@ -71,7 +71,7 @@ def search_headline(option,cs):
     print(f"Content: {response['content']}")
 
 def search_source(option,cs):
-
+    #print menu
     print("\nSelect option :")
     print("1- Search by Category")
     print("2- Search by Country")
@@ -79,20 +79,24 @@ def search_source(option,cs):
     print("4- List all")
     print("5- Back to Main Menu")
 
+    #get input and send/receive
     sub_option = input("Enter your option: ")
     if sub_option == '5':
         return
     send(sub_option,cs)
     response = receive(cs)
 
-    print("Results:")
+    #print results all results 
+    print("All sources :")
     for idx, item in enumerate(response['sources']):
         print(f"{idx + 1}. {item['name']} - {item['description']}")
 
+    #ask user for specific item
     selected_item = int(input("Enter source number: "))
-    send_choice(str(selected_item), client_socket)
-    response = receive_response(client_socket)
+    send(str(selected_item), cs)
+    response = receive(cs)
     
+    #print results for selected items
     print("Selected Source Details:")
     print(f"Source: {response['name']}")
     print(f"Country: {response['country']}")
@@ -101,7 +105,7 @@ def search_source(option,cs):
     print(f"Category: {response['category']}")
     print(f"Language: {response['language']}")
 
-    
+
 
 
 
