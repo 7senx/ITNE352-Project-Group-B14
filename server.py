@@ -1,5 +1,5 @@
 import socket
-
+import json 
 server_ip = '127.0.0.1'
 server_port = 5443
 key = ' '
@@ -34,6 +34,22 @@ def search_news(choice, client_socket, c):
     elif sub_choice == '4':
         data = newsapi.get_top_headlines()
         filename = f"{c}_list_all_headlines.json"
+        with open(filename, 'w') as f:
+         json.dump(data, f)
+
+    client_socket.send(json.dumps(data).encode())
+    def start_server():
+        ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        ss.bind((S_HOST, S_PORT))
+        ss.listen(MAX_CONNECTIONS)
+        print(f"Server listening on {S_HOST}:{S_PORT}")
+        while True:
+            client_socket, client_address = ss.accept()
+            client_handler = threading.Thread(target=handle_client, args=(client_socket, client_address))
+            client_handler.start()
+    if __name__ == "__main__":
+        start_server()
         
+
 
 
