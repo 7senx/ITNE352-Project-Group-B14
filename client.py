@@ -27,9 +27,9 @@ def start_client():
         option = input("Enter option: ")
         
         if option == '1':
-            search_headlines(option, cs)
+            search_headline(option, cs)
         elif option == '2':
-            search_sources(option, cs)
+            search_source(option, cs)
         elif option == '3':
             send_option("3", cs)
             print("Client Offline")
