@@ -30,7 +30,7 @@ def get_sources(criteria,option,client_name):
         data = api.get_sources()
 
     
-    file_path = os.path.join(path, f'B14_{client_name}_2.{option}.json')
+    file_path = os.path.join(PATH, f'B14_{client_name}_2.{option}.json')
     with open(file_path, 'w') as outfile:
         json.dump(data, outfile)
 
