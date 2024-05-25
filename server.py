@@ -1,68 +1,55 @@
 import socket
-import json 
+import API_interface
 import threading
-from newsapi import NewsApiClient 
+import json
+import time
+import os
+SERVER_IP = "127.0.0.1"
+SERVER_PORT = 6900
 
-SERVER_IP = '127.0.0.1'
-SERVER_PORT = 5443
-API_KEY = '844863c15fad42cba626fb66d2c24ef2'
-api = NewsApiClient(api_key=API_KEY)
+def start_server():
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((SERVER_IP, SERVER_PORT))
+    server_socket.listen(3)
+    print(f"Server is listening on {SERVER_IP}:{SERVER_PORT}")
+    while True:
+        client_socket, client_address = server_socket.accept()
+        client_handler = threading.Thread(target=client_handling, args=(client_socket, client_address))
+        client_handler.start()
 
-def handle_clients(cs,address):
-    print(f"Host {address} connected")
-
-    client_name = cs.recv(1024).decode()
-    print(f"Client '{client_name}' connected")
-
+def client_handling(client_socket,address):
+    print(f"New connection from {address}")
+    client_name = client_socket.recv(10000).decode()
+    print(f"Client {client_name} connected")
     while True:
         try:
-            option = cs.recv(1024).decode()
+            msg = client_socket.recv(10000).decode()
+            if not msg:
+                break
+            option, criteria = msg.split(":")
+            main_option, sub_option = option.split(".")
 
-            if option.startswith('1'):
-                search_news(option, cs, client_name)
-
+            if main_option == "1":
+                API_interface.get_headlines(criteria,sub_option,client_name)
+                response(main_option, sub_option, client_name,client_socket)
+            elif main_option == "2":
+                API_interface.get_sources(criteria,sub_option,client_name)
+                response(main_option, sub_option, client_name,client_socket)
+                
         except Exception as e:
             print(f"Error handling client {client_name}: {e}")
             break
+    client_socket.close()
+    print(f" {address} disconnected")
 
-    print(f"Client '{client_name}' disconnected")
-    cs.close()
+def response(main_option, sub_option, client_name,client_socket):
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_records")
+    file_path = os.path.join(path, f'B14_{client_name}_{main_option}.{sub_option}.json')
 
-def search_news(option, cs, client_name):
+    with open(file_path) as json_file:
+        data = json.load(json_file)
+        client_socket.send(json.dumps(data).encode())
+        print(f"File B14_{client_name}_{main_option}.{sub_option}.json sent to {client_name}")
 
-    _, sub_option = option.split('.')
-    if sub_option == '1':
-        keyword = input("Enter keyword: ")
-        data = newsapi.get_top_headlines(q=keyword)
-        filename = f"{c}_search_keywords.json"
-
-    elif sub_option == '2':
-        category = input("Enter category (business, entertainment, general, health, science, sports, technology): ")
-        data = newsapi.get_top_headlines(category=category)
-        filename = f"{c}_search_category_{category}.json"
-
-    elif sub_option == '3':
-        country = input("Enter country (au, nz, ca, ae, sa, gb, us, eg, ma): ")
-        data = newsapi.get_top_headlines(country=country)
-        filename = f"{c}_search_country_{country}.json"
-
-    elif sub_option == '4':
-        data = newsapi.get_top_headlines()
-        filename = f"{c}_list_all_headlines.json"
-        with open(filename, 'w') as f:
-            json.dump(data, f)
-
-    cs.send(json.dumps(data).encode())
-
-    def start_server():
-        ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ss.bind((S_HOST, S_PORT))
-        ss.listen(3)
-        print(f"Server listening on {S_HOST}:{S_PORT}")
-        while True:
-            cs, client_address = ss.accept()
-            client_handler = threading.Thread(target=handle_client, args=(cs, client_address))
-            client_handler.start()
-            
-    if __name__ == "__main__":
-        start_server()
+if __name__ == "__main__":
+    start_server()
