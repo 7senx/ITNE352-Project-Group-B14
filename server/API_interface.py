@@ -2,7 +2,7 @@ import json
 import os
 from newsapi import NewsApiClient 
 api = NewsApiClient(api_key='844863c15fad42cba626fb66d2c24ef2')
-path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_records")
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".gitignore\json_records")
 
 def get_headlines(criteria,option,client_name):
     if option == '1':

@@ -43,7 +43,7 @@ def client_handling(client_socket,address):
     print(f" {address} disconnected")
 
 def response(main_option, sub_option, client_name,client_socket):
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_records")
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".gitignore\json_records")
     file_path = os.path.join(path, f'B14_{client_name}_{main_option}.{sub_option}.json')
 
     with open(file_path) as json_file:
