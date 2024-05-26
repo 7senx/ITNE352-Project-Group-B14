@@ -8,12 +8,12 @@ The project aims to develop a Python-based client-server system for real-time ne
 Second 2024
 
 ## Group
-- **Group Name:** B7
+- **Group Name:** B14
 - **Course Code:** ITNE352
 - **Section:** 2
 - **Members:**
-  - Saad Isa (ID: 202104139)
-  - Rashed Abdulrhman (ID: 202100408)
+  - Mahmood Alaa (ID: 202107304)
+  - Husain Nabeel (ID: 202108591)
 
 ## Table of Contents
 1. [Requirements](#requirements)
