@@ -29,8 +29,8 @@ To set up and run the project locally, follow these steps:
    ```bash
    git clone https://github.com/your-username/multithreaded-news-system.git
 3.Navigate to the project directory:
-  ```bash
+```bash
   cd multithreaded-news-system
 4.Install the required Python packages using pip:
-  ```bash
+```bash
   pip install -r requirements.txt
