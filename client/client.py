@@ -153,7 +153,6 @@ def receive_headlines( client_socket):
     print(f"URL: {selected_headline['url']}")
     print(f"Description: {selected_headline['description']}")
     print(f"Published At: {selected_headline['publishedAt']}")
-    print(f"Content: {selected_headline['content']}")
 
 def receive_sources( client_socket):
 
