@@ -1,29 +1,69 @@
 # Multithreaded News Client/Server Information System
 
 ## Project Description
-The Multithreaded News Client/Server Information System is a Python-based application that facilitates the exchange of news updates between clients and a central server. It utilizes multithreading, network programming, and API integration to enable users to retrieve headlines and news sources efficiently.
+The project aims to develop a Python-based client-server system for real-time news exchange. The server component handles multiple client connections and retrieves news updates from NewsAPI.org, while the client script provides a user-friendly interface for querying the server and displaying news content.
 
 ## Semester
-Fall 2023
+Second 2024
 
 ## Group
-- **Group Name:** TechInnovate
-- **Course Code:** ITNE 352
-- **Section:** 01
-- **Students:**
-  - Mahmood Alaa (202107304)
-  - Husain Nabeel (202108591)
+- **Group Name:** B14
+- **Course Code:** ITNE352
+- **Section:** 2
+- **Members:**
+  - Mahmood Alaa (ID: 202107304)
+  - Husain Nabeel (ID: 202108591)
 
 ## Table of Contents
-1. Introduction
-2. Project Description
-3. Client Code
-4. Server Code
-5. GUI Code
-6. Conclusion
-7. Documentation
+1. [Requirements](#requirements)
+2. [How to Run the System](#how-to-run-the-system)
+3. [Scripts Description](#scripts-description)
+4. [Additional Concepts](#additional-concepts)
+5. [Acknowledgments](#acknowledgments)
+6. [Conclusion](#conclusion)
 
 ## Requirements
-To set up and run the project in a local environment, follow these steps:
-1. Install Python (version X.X.X or higher) on your system.
-2. Install the necessary dependencies using pip:
+- **Dependencies:** Python 3.x, Tkinter, requests, newsapi-python
+- **Installation:**
+  - Install Python 3.x from [python.org](https://www.python.org/)
+  - Install required libraries:
+    ```bash
+    pip install requests
+    pip install newsapi-python
+
+## How to Run the System
+### Server Setup
+1. Open a terminal window.
+2. Navigate to the directory containing the server script.
+3. Run the server script:
+   ```bash
+   python server.py
+
+### Client Setup
+1. Open a new terminal window.
+2. Navigate to the directory containing the client script.
+3. Run the client script:
+   ```bash
+   python client.py
+
+## Scripts Description
+### Server Script
+- **Main Functionalities:** Handles client connections, interacts with NewsAPI, and serves news data to clients.
+- **Utilized Packages:** socket, threading, json, requests, newsapi.NewsApiClient
+- **Key Functions:** start_server, client_handling, response_handling
+
+### Client Script
+- **Main Functionalities:** Provides a GUI for user interaction, communicates with the server, and displays news content.
+- **Utilized Packages:** socket, json, tkinter
+- **Class:** NewsClientApp
+
+## Additional Concepts
+- **Error Handling:** Implemented on both server and client sides to manage exceptions and provide user feedback.
+- **Multithreading:** Enables the server to handle multiple client connections concurrently.
+
+## Acknowledgments
+- We extend our gratitude to Dr. Mohammed Abdulaziz Almeer for his guidance and support.
+- Special thanks to NewsAPI.org for providing valuable resources.
+
+## Conclusion
+- The Multithreaded News Client/Server Information System showcases proficiency in network programming, API integration, and user interface design, contributing to a practical understanding of modern software development principles.
