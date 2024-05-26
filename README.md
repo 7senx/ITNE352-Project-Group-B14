@@ -1,4 +1,4 @@
-# Report: ITNE 352
+#  ITNE 352 Project
 
 ## Prepped by
 - Mahmood Alaa (ID: 202107304)
