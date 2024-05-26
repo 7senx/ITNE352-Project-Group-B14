@@ -1,5 +1,4 @@
-# Project Title
-Multithreaded News Client/Server Information System
+# Multithreaded News Client/Server Information System
 
 ## Project Description
 The project aims to develop a Python-based client-server system for real-time news exchange. The server component handles multiple client connections and retrieves news updates from NewsAPI.org, while the client script provides a user-friendly interface for querying the server and displaying news content.
