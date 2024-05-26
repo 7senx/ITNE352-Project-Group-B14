@@ -1,38 +1,65 @@
-# Multithreaded News Client/Server Information System
+# ITNE 352 Project Report
 
-## Project Description
-The Multithreaded News Client/Server Information System is a project developed as part of the ITNE352 course at the University of Bahrain. It aims to create a client-server system using Python scripts for efficient communication and retrieval of news updates from the NewsAPI.org service.
+## Introduction
 
-## Semester
-Spring 2024
+Within the context of modern education at the University of Bahrain, the ITNE352 course focuses on developing proficiency with contemporary technology. A key project in this course is the Multithreaded News Client/Server Information System, aimed at facilitating efficient sharing and obtaining of breaking news updates.
 
-## Group
-- Group Name: TBD
-- Course Code: ITNE352
-- Section: [Your section]
-- Students:
-  - Mahmood Alaa - 202107304
-  - Husain Nabeel - 202108591
+### Project Description
 
-## Table of Contents
-1. [Requirements](#requirements)
-2. [How to Run](#how-to-run)
-3. [Scripts Overview](#scripts-overview)
-4. [Additional Concepts](#additional-concepts)
-5. [Acknowledgments](#acknowledgments)
-6. [Conclusion](#conclusion)
+The goal of the project is to create a client-server system using Python scripts. The server component handles multiple client connections, responds to client requests, and retrieves news updates from the NewsAPI.org service. The client script establishes a connection with the server, provides a user-friendly menu, queries the server, and displays the responses.
 
-## Requirements
-To set up and run the project locally, follow these steps:
-1. Install Python (version X.X.X) from [Python's official website](https://www.python.org/).
-2. Clone this repository to your local machine using Git:
-   ```bash
-     git clone https://github.com/your-username/multithreaded-news-system.git
-   
-3.Navigate to the project directory:
-  ```bash
-   cd multithreaded-news-system
+#### Client Code
 
-4.Install the required Python packages using pip:
-```bash
-  pip install -r requirements.txt
+The client script is implemented in Python, utilizing the socket module for smooth communication between client and server objects. It features a user-friendly interface and structured data transmission using JSON encoding for scalability and interoperability.
+
+#### Server Code
+
+The server code configures a server to accept connections, respond to client requests, and communicate with the NewsAPI interface. Functions include server setup, client handling, response handling, and a main block to start the server.
+
+#### GUI Code
+
+The GUI code provides a solid foundation for a News Client application using Tkinter. It includes functionalities for client initialization, frame navigation, user interface, data communication, functionality, displaying data, and basic error handling.
+
+## Recommended Design Guidelines
+
+The project description offers design principles including starting with a basic Python server, implementing API integration, and adding threads for handling multiple connections.
+
+## Documentation
+
+### Project Details
+- *Title:* Multithreaded News Client/Server Information System
+- *Semester:* [Semester Name]
+- *Group:* [Group Name], ITNE352, [Section], [Student Names], [Student IDs]
+
+### Table of Contents
+- Introduction
+- Project Description
+- Client Code
+- Server Code
+- GUI Code
+- Recommended Design Guidelines
+- Documentation
+  - Requirements
+  - How to
+  - The Scripts
+  - Additional Concepts
+  - Acknowledgments
+  - Conclusion
+
+### Requirements
+- Provide detailed steps to set up and run the project locally, including installing dependencies and configuring the environment.
+
+### How to
+- Explain how to run the system and interact with the server.
+
+### The Scripts
+- Briefly describe the client-server scripts, including main functionalities, utilized packages, functions, and classes. Include relevant code snippets.
+
+### Additional Concepts
+- Describe any additional concepts used in the project and highlight corresponding code and functionality.
+
+### Acknowledgments
+- Acknowledge contributions from individuals, organizations, or resources.
+
+### Conclusion
+- Summarize the project's significance, learnings, and implications.
