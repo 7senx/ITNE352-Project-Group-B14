@@ -24,14 +24,14 @@ Spring 2024
 
 ## Requirements
 To set up and run the project locally, follow these steps:
-1. Install Python (version X.X.X) from [Python's official website](https://www.python.org/).
-2. Clone this repository to your local machine using Git:
+###1. Install Python (version X.X.X) from [Python's official website](https://www.python.org/).
+###2. Clone this repository to your local machine using Git:
    ```bash
    git clone https://github.com/your-username/multithreaded-news-system.git
-3.Navigate to the project directory:
+####3.Navigate to the project directory:
   ```bash
    cd multithreaded-news-system
 
-4.Install the required Python packages using pip:
+###4.Install the required Python packages using pip:
 ```bash
   pip install -r requirements.txt
