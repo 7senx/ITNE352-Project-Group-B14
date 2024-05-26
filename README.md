@@ -27,3 +27,4 @@ Fall 2023
 To set up and run the project in a local environment, follow these steps:
 1. Install Python (version X.X.X or higher) on your system.
 2. Install the necessary dependencies using pip:
+
