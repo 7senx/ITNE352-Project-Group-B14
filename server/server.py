@@ -2,7 +2,6 @@ import socket
 import API_interface
 import threading
 import json
-import time
 import os
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 6900
