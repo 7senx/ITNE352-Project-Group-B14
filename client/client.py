@@ -12,15 +12,16 @@ def start_client():
     #connect to server
     client_socket.connect((SERVER_IP, SERVER_PORT))
     print(f"Connected to server {SERVER_IP}:{SERVER_PORT}")
+    #ask for client name
     client_name = input("Enter your name: ")
     send(client_name, client_socket)
+    #main menu
     while True:
-        
         print("Select option: \n")
         print("1- Search Headlines")
         print("2- List of Sources")
         print("3- Quit\n")
-
+        
         option = int(input("Enter your option: "))
         if option == 1:
             getHeadline(client_socket)
@@ -35,6 +36,7 @@ def start_client():
     
 
 def getHeadline(client_socket):
+    #headline search menu
     print("Select option: ")
     print("1- Search for Keywords")
     print("2- Search by Category")
@@ -42,14 +44,12 @@ def getHeadline(client_socket):
     print("4- List all New Headlines")
     print("5- Back to Main Menu")
     sub_option = int(input("Enter your option: "))
-
     #seach by keyword
     if sub_option == 1:
         criteria = input("Enter keyword: ")
         msg = f"1.{sub_option}:{criteria}"
         send(msg, client_socket)
         receive_headlines(client_socket)
-
     #seach by category
     elif sub_option == 2:
         print(CATEGORIES)
@@ -60,7 +60,6 @@ def getHeadline(client_socket):
         msg = f"1.{sub_option}:{criteria}"
         send(msg, client_socket)
         receive_headlines(client_socket)
-
     #seach by country
     elif sub_option == 3:
         criteria = input(f"Enter country: {COUNTRIES}")
@@ -70,7 +69,6 @@ def getHeadline(client_socket):
         msg = f"1.{sub_option}:{criteria}"
         send(msg, client_socket)
         receive_headlines(client_socket)
-
     #list all new headlines
     elif sub_option == 4:
         msg = f"1.{sub_option}:null"
