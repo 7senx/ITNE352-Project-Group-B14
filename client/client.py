@@ -40,6 +40,7 @@ def start_client():
                 print("Invalid option. Please try again.")
         except Exception as e:
             print(f"Error handling client {client_name}: {e}")
+            client_socket.close()
             break
     
 
