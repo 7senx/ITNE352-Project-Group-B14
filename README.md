@@ -23,28 +23,36 @@ Second 2024
 6. [Conclusion](#conclusion)
 
 ## Requirements
-- **Dependencies:** Python 3.x, Tkinter, requests, newsapi-python
+- **Dependencies:** Python 3, Tkinter, newsapi-python
 - **Installation:**
-  - Install Python 3.x from [python.org](https://www.python.org/)
+  - Install Python 3 from [python.org](https://www.python.org/)
   - Install required libraries:
-    ```bash
-    pip install requests
+  ```
     pip install newsapi-python
-
+    pip install tkinter
+  ```
 ## How to Run the System
-### Server Setup
+### 1. Server Setup
 1. Open a terminal window.
 2. Navigate to the directory containing the server script.
 3. Run the server script:
-   ```bash
+```
    python server.py
-
-### Client Setup
+```
+### 2. Client Setup
 1. Open a new terminal window.
 2. Navigate to the directory containing the client script.
 3. Run the client script:
-   ```bash
+```
    python client.py
+```
+### 2. Client GUI setup (to run client with GUI)
+1. Open a new terminal window
+2. Navigate to the directory containing the clientgui script
+3. Run the client script:
+```
+  python clientgui.py
+```
 
 ## Scripts Description
 ### Server Script
