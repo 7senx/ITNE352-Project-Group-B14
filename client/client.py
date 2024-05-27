@@ -22,7 +22,11 @@ def start_client():
         print("2- List of Sources")
         print("3- Quit\n")
         
-        option = int(input("Enter your option: "))
+        option = (input("Enter your option: "))
+        if not option.isdigit():
+            print("Invalid option. Please try again.")
+            continue
+        option = int(option)
         if option == 1:
             getHeadline(client_socket)
         elif option == 2:
