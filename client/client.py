@@ -17,26 +17,30 @@ def start_client():
     send(client_name, client_socket)
     #main menu
     while True:
-        print("Select option: \n")
-        print("1- Search Headlines")
-        print("2- List of Sources")
-        print("3- Quit\n")
-        
-        option = (input("Enter your option: "))
-        if not option.isdigit():
-            print("Invalid option. Please try again.")
-            continue
-        option = int(option)
-        if option == 1:
-            getHeadline(client_socket)
-        elif option == 2:
-            getSource(client_socket)
-        elif option == 3:
-            print("Quitting program...")
-            client_socket.close()
+        try:
+            print("Select option: \n")
+            print("1- Search Headlines")
+            print("2- List of Sources")
+            print("3- Quit\n")
+            
+            option = (input("Enter your option: "))
+            if not option.isdigit():
+                print("Invalid option. Please try again.")
+                continue
+            option = int(option)
+            if option == 1:
+                getHeadline(client_socket)
+            elif option == 2:
+                getSource(client_socket)
+            elif option == 3:
+                print("Quitting program...")
+                client_socket.close()
+                break
+            else:
+                print("Invalid option. Please try again.")
+        except Exception as e:
+            print(f"Error handling client {client_name}: {e}")
             break
-        else:
-            print("Invalid option. Please try again.")
     
 
 def getHeadline(client_socket):
