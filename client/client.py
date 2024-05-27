@@ -38,8 +38,8 @@ def start_client():
                 break
             else:
                 print("Invalid option. Please try again.")
-        except Exception as e:
-            print(f"Error handling client {client_name}: {e}")
+        except (KeyboardInterrupt, Exception) as e:
+            print(f"Error, quitting program")
             client_socket.close()
             break
     
