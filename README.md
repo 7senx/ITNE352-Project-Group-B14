@@ -23,13 +23,12 @@ Second 2024
 6. [Conclusion](#conclusion)
 
 ## Requirements
-- **Dependencies:** Python 3, Tkinter, newsapi-python
+- **Dependencies:** Python 3, newsapi-python, Tkinter(to use GUI client)
 - **Installation:**
   - Install Python 3 from [python.org](https://www.python.org/)
   - Install required libraries:
   ```
     pip install newsapi-python
-    pip install tkinter
   ```
 ## How to Run the System
 ### 1. Server Setup
@@ -57,21 +56,106 @@ Second 2024
 ## Scripts Description
 ### Server Script
 - **Main Functionalities:** Handles client connections, interacts with NewsAPI, and serves news data to clients.
-- **Utilized Packages:** socket, threading, json, requests, newsapi.NewsApiClient
-- **Key Functions:** start_server, client_handling, response_handling
+- **Utilized Packages:** socket, threading, json, newsapi.NewsApiClient
+- **Key Functions:**
+  
+  - start_server: creates a TCP/IP socket, binds it to a specified IP and port, and listens for up to three connections. For each incoming connection, it spawns a new thread to handle the client using the client_handling function.
+  ```
+  def start_server():
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((SERVER_IP, SERVER_PORT))
+    server_socket.listen(3)
+    print(f"Server is listening on {SERVER_IP}:{SERVER_PORT}")
+    while True:
+        client_socket, client_address = server_socket.accept()
+        client_handler = threading.Thread(target=client_handling, args=(client_socket, client_address))
+        client_handler.start()
+  ```
+  
+  - client_handling: logs the connection, receives the client's name, and continuously processes messages from the client. Based on the message content, it either retrieves headlines or sources via the API_interface and sends the appropriate response. It handles exceptions and closes the connection when done.
+  ```
+  def client_handling(client_socket,address):
+    print(f"New connection from {address}")
+    client_name = client_socket.recv(10000).decode()
+    print(f"Client {client_name} connected")
+    while True:
+        try:
+            msg = client_socket.recv(10000).decode()
+            if not msg:
+                break
+            option, criteria = msg.split(":")
+            main_option, sub_option = option.split(".")
+
+            if main_option == "1":
+                API_interface.get_headlines(criteria,sub_option,client_name)
+                response(main_option, sub_option, client_name,client_socket)
+            elif main_option == "2":
+                API_interface.get_sources(criteria,sub_option,client_name)
+                response(main_option, sub_option, client_name,client_socket)
+                
+        except Exception as e:
+            print(f"Error handling client {client_name}: {e}")
+            break
+    client_socket.close()
+    print(f" {address} disconnected")
+  ```
+  
+  - response: sends a JSON response to the client. It constructs the file path based on client information, reads the JSON data, and sends it over the socket, logging the action.
+  ```
+  def response(main_option, sub_option, client_name,client_socket):
+    file_path = os.path.join(API_interface.PATH, f'B14_{client_name}_{main_option}.{sub_option}.json')
+
+    with open(file_path) as json_file:
+        data = json.load(json_file)
+        client_socket.send(json.dumps(data).encode())
+        print(f"File B14_{client_name}_{main_option}.{sub_option}.json sent to {client_name}")
+  ```
+  
 
 ### Client Script
-- **Main Functionalities:** Provides a GUI for user interaction, communicates with the server, and displays news content.
-- **Utilized Packages:** socket, json, tkinter
-- **Class:** NewsClientApp
+- **Main Functionalities:** Provides a UI for user interaction, communicates with the server, and displays news content.
+- **Utilized Packages:** socket, json
+- **Key Functions:**
+  
+    - getHeadline, getSource : for sending the user request to the server based on chosen option.
+    - receive_headlines, recieve_sources: to recieve the json file from the server and display it to the client.
+    - start_client
+  ```
+      def start_client():
+    #init client socket
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #connect to server
+    client_socket.connect((SERVER_IP, SERVER_PORT))
+    print(f"Connected to server {SERVER_IP}:{SERVER_PORT}")
+    #ask for client name
+    client_name = input("Enter your name: ")
+    send(client_name, client_socket)
+    #main menu
+    while True:
+        print("Select option: \n")
+        print("1- Search Headlines")
+        print("2- List of Sources")
+        print("3- Quit\n")
+        option = int(input("Enter your option: "))
+        if option == 1:
+            getHeadline(client_socket)
+        elif option == 2:
+            getSource(client_socket)
+        elif option == 3:
+            print("Quitting program...")
+            client_socket.close()
+            break
+        else:
+            print("Invalid option. Please try again.")
+  ```
+  
 
 ## Additional Concepts
-- **Error Handling:** Implemented on both server and client sides to manage exceptions and provide user feedback.
-- **Multithreading:** Enables the server to handle multiple client connections concurrently.
+- **Graphical User Interface for client side**: user friendly GUI to use the system easily. (clientgui.py)
 
 ## Acknowledgments
-- We extend our gratitude to Dr. Mohammed Abdulaziz Almeer for his guidance and support.
-- Special thanks to NewsAPI.org for providing valuable resources.
+- [Khaled Abdulrahman](https://github.com/akhaled01) helped us with understanding the project.
+- [Matt Lisivick](https://github.com/mattlisiv)  provided the newsapi-python library
 
 ## Conclusion
 - The Multithreaded News Client/Server Information System showcases proficiency in network programming, API integration, and user interface design, contributing to a practical understanding of modern software development principles.
